@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
-	"github.com/suryaherdiyanto/go-web/pkg/render"
-	"github.com/suryaherdiyanto/go-web/pkg/repository"
+	"github.com/suryaherdiyanto/go-web/src/render"
+	"github.com/suryaherdiyanto/go-web/src/repository"
 )
 
 type BaseHandler struct {

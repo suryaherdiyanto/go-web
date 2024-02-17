@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/suryaherdiyanto/go-web/pkg/config"
+import "github.com/suryaherdiyanto/go-web/src/config"
 
 type AppRepository struct {
 	Config *config.AppConfig

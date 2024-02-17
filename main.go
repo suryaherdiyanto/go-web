@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/suryaherdiyanto/go-web/pkg/config"
+	"github.com/suryaherdiyanto/go-web/src/config"
 )
 
 func main() {

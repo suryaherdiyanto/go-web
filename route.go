@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/go-chi/chi/v5"
-	"github.com/suryaherdiyanto/go-web/pkg/config"
-	"github.com/suryaherdiyanto/go-web/pkg/handlers"
-	"github.com/suryaherdiyanto/go-web/pkg/repository"
+	"github.com/suryaherdiyanto/go-web/src/config"
+	"github.com/suryaherdiyanto/go-web/src/handlers"
+	"github.com/suryaherdiyanto/go-web/src/repository"
 )
 
 func NewRouter(appConfig *config.AppConfig) *chi.Mux {
