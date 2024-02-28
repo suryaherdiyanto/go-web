@@ -4,24 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
-	"github.com/alexedwards/scs/v2"
+	"github.com/suryaherdiyanto/go-web/src/app"
 	"github.com/suryaherdiyanto/go-web/src/config"
+	"github.com/suryaherdiyanto/go-web/src/session"
 )
 
 var appConfig config.AppConfig
 
 func main() {
 	appConfig = config.AppConfig{AppEnv: "development", UseCache: true}
-	session := scs.New()
-	session.Lifetime = 24 * time.Hour
-	session.Cookie.HttpOnly = true
-	session.Cookie.Path = "/"
-	session.Cookie.Secure = (appConfig.AppEnv == "production")
-	session.Cookie.SameSite = http.SameSiteLaxMode
-
-	appConfig.Session = session
+	app := app.New(&appConfig)
+	app.Session = session.New(&appConfig)
 
 	router := NewRouter(&appConfig)
 
