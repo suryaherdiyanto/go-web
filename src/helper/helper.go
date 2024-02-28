@@ -12,14 +12,16 @@ func LoadEnv(file string) {
 	f, err := os.Open(file)
 
 	if err != nil {
-		log.Fatalf("Could not load the %s file: %v", file, err)
+		log.Printf("Could not load the %s \n Exeption: %v. Skipping... \n", file, err)
+		f.Close()
+		return
 	}
 	defer f.Close()
 
 	content, err := io.ReadAll(f)
 
 	if err != nil {
-		log.Fatalf("Something went wrong while reading the %s file %v", file, err)
+		log.Fatalf("Something went wrong while reading the %s \n Exception: %v", file, err)
 	}
 
 	lines := strings.Split(string(content), "\n")
