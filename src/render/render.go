@@ -2,10 +2,10 @@ package render
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
-	"log"
 	"net/http"
+
+	"github.com/suryaherdiyanto/go-web/src/helper"
 )
 
 type View struct {
@@ -21,37 +21,21 @@ func New(path string) *View {
 
 func (v *View) Render(w http.ResponseWriter, name string, data any) {
 	files, err := template.New(name+".layout.html").Funcs(v.Funcs).ParseFiles(v.BasePath+"/"+name+".layout.html", v.BasePath+"/master.layout.html")
-
-	if err != nil {
-		fmt.Fprintf(w, "Could not render view: %v", err)
-		log.Printf("Something went wrong: %v", err)
-	}
+	helper.HandleExeption(w, err)
 
 	err = files.Execute(w, data)
-
-	if err != nil {
-		fmt.Fprintf(w, "Something went wrong: %v", err)
-		log.Printf("Something went wrong: %v", err)
-	}
-
+	helper.HandleExeption(w, err)
 }
 
 func (v *View) RenderPartial(name string, data any) template.HTML {
 	files, err := template.New(name + ".partial.html").ParseFiles(v.BasePath + "/partials/" + name + ".partial.html")
-
-	if err != nil {
-		log.Fatalf("Could not parse partials: %v", err)
-		log.Printf("Something went wrong: %v", err)
-	}
-
 	writer := new(bytes.Buffer)
+
+	helper.HandleExeption(writer, err)
 
 	err = files.Execute(writer, data)
 
-	if err != nil {
-		log.Fatalf("Something went wrong: %v", err)
-		log.Printf("Something went wrong: %v", err)
-	}
+	helper.HandleExeption(writer, err)
 
 	return template.HTML(writer.String())
 }

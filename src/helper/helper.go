@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -29,5 +30,12 @@ func LoadEnv(file string) {
 	for _, line := range lines {
 		env := strings.Split(line, "=")
 		os.Setenv(env[0], env[1])
+	}
+}
+
+func HandleExeption(w io.Writer, err error) {
+	if err != nil {
+		fmt.Fprintf(w, "Something went wrong: %v", err)
+		log.Printf("Something went wrong: %v", err)
 	}
 }
