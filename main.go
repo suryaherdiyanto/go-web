@@ -7,6 +7,7 @@ import (
 
 	"github.com/suryaherdiyanto/go-web/src/app"
 	"github.com/suryaherdiyanto/go-web/src/config"
+	"github.com/suryaherdiyanto/go-web/src/route"
 	"github.com/suryaherdiyanto/go-web/src/session"
 )
 
@@ -17,7 +18,7 @@ func main() {
 	app := app.New(&appConfig)
 	app.Session = session.New(&appConfig)
 
-	router := NewRouter(&appConfig)
+	router := route.NewRouter(app)
 
 	fmt.Println("Server started at port 5000")
 	log.Fatal(http.ListenAndServe(":5000", router))
