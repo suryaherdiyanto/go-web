@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/suryaherdiyanto/go-web/src/app"
 	"github.com/suryaherdiyanto/go-web/src/config"
+	"github.com/suryaherdiyanto/go-web/src/helper"
 	"github.com/suryaherdiyanto/go-web/src/route"
 	"github.com/suryaherdiyanto/go-web/src/session"
 )
@@ -14,7 +16,9 @@ import (
 var appConfig config.AppConfig
 
 func main() {
-	appConfig = config.AppConfig{AppEnv: "development", UseCache: true}
+	helper.LoadEnv("./.env")
+	appConfig = config.AppConfig{AppEnv: os.Getenv("APP_ENV"), UseCache: true}
+	log.Print(appConfig)
 	app := app.New(&appConfig)
 	app.Session = session.New(&appConfig)
 
